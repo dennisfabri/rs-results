@@ -1,0 +1,18 @@
+[
+  {
+    "Typ": "Eingabe",
+    "Startnummern": ["1", "2", "3", "4"],
+    "reihenfolge": [1, 2, 4, 6]
+  },
+  {
+    "Typ": "Daten",
+    "Startnummern": ["1", "2", "3", "4"],
+    "platzierungen": [1, 2, 3, 4]
+  },
+  {
+    "Typ": "Ergebnis",
+    "Startnummern": ["1", "2", "3", "4"],
+    "plätze": [1, 2, 3, 4],
+    "punkte": [20, 18, 16, 14]
+  }
+]
