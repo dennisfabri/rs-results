@@ -10,7 +10,10 @@ public class Ergebnis {
     private final SchwimmerPlatzierung[] platzierungen;
 
     public Platz[] getPlaetze() {
-        return Arrays.stream(platzierungen).map(platzierung -> new Platz(platzierung.getStartnummer(),platzierung.getPlatzierung())).toArray(Platz[]::new);
+    return Arrays.stream(platzierungen)
+        .map(platzierung -> new Platz(platzierung.getStartnummer(), platzierung.getPlatzierung()))
+        .sorted((platz1, platz2) -> platz1.getPlatz() - platz2.getPlatz())
+        .toArray(Platz[]::new);
     }
 
 }
