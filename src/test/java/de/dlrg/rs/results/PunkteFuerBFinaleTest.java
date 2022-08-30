@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test für ein B Finale der Plätze 9-16
  */
-
 class PunkteFuerBFinaleTest {
 
     @ParameterizedTest
@@ -25,7 +24,7 @@ class PunkteFuerBFinaleTest {
 
         assertEquals(8.0, platz1.getPunkte(), 0.001);
         assertEquals(startnummer, platz1.getStartnummer());
-        assertEquals(9, platz1.getPlatz());
+        assertEquals(9, platz1.getPlatz().getAsInt());
     }
 
     @Test
@@ -40,7 +39,7 @@ class PunkteFuerBFinaleTest {
 
         Platz platz16 = ergebnis.getPlaetze()[7];
         assertEquals("1-8", platz16.getStartnummer());
-        assertEquals(16, platz16.getPlatz());
+        assertEquals(16, platz16.getPlatz().getAsInt());
         assertEquals(1.0, platz16.getPunkte(), 0.001);
     }
 }

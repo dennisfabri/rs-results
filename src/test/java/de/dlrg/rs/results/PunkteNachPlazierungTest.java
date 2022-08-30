@@ -30,7 +30,7 @@ class PunkteNachPlazierungTest {
 
         assertEquals(20.0, platz1.getPunkte(), 0.001);
         assertEquals(startnummer, platz1.getStartnummer());
-        assertEquals(1, platz1.getPlatz());
+        assertEquals(1, platz1.getPlatz().getAsInt());
     }
 
     @ParameterizedTest
@@ -45,12 +45,12 @@ class PunkteNachPlazierungTest {
 
         Platz platz1 = ergebnis.getPlaetze()[0];
         assertEquals("1-1", platz1.getStartnummer());
-        assertEquals(1, platz1.getPlatz());
+        assertEquals(1, platz1.getPlatz().getAsInt());
         assertEquals(20.0, platz1.getPunkte(), 0.001);
 
         Platz platz2 = ergebnis.getPlaetze()[1];
         assertEquals(startnummer, platz2.getStartnummer());
-        assertEquals(2, platz2.getPlatz());
+        assertEquals(2, platz2.getPlatz().getAsInt());
         assertEquals(18.0, platz2.getPunkte(), 0.001);
     }
 
@@ -66,7 +66,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz3 = ergebnis.getPlaetze()[2];
         assertEquals("1-6", platz3.getStartnummer());
-        assertEquals(3, platz3.getPlatz());
+        assertEquals(3, platz3.getPlatz().getAsInt());
         assertEquals(16.0, platz3.getPunkte(), 0.001);
     }
 
@@ -82,7 +82,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz4 = ergebnis.getPlaetze()[3];
         assertEquals("1-4", platz4.getStartnummer());
-        assertEquals(4, platz4.getPlatz());
+        assertEquals(4, platz4.getPlatz().getAsInt());
         assertEquals(14.0, platz4.getPunkte(), 0.001);
     }
 
@@ -98,7 +98,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz5 = ergebnis.getPlaetze()[4];
         assertEquals("1-5", platz5.getStartnummer());
-        assertEquals(5, platz5.getPlatz());
+        assertEquals(5, platz5.getPlatz().getAsInt());
         assertEquals(12.0, platz5.getPunkte(), 0.001);
     }
 
@@ -115,7 +115,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz6 = ergebnis.getPlaetze()[5];
         assertEquals("1-6", platz6.getStartnummer());
-        assertEquals(6, platz6.getPlatz());
+        assertEquals(6, platz6.getPlatz().getAsInt());
         assertEquals(11.0, platz6.getPunkte(), 0.001);
     }
 
@@ -131,7 +131,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz7 = ergebnis.getPlaetze()[6];
         assertEquals("1-7", platz7.getStartnummer());
-        assertEquals(7, platz7.getPlatz());
+        assertEquals(7, platz7.getPlatz().getAsInt());
         assertEquals(10.0, platz7.getPunkte(), 0.001);
     }
     @Test
@@ -146,7 +146,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz8 = ergebnis.getPlaetze()[7];
         assertEquals("1-8", platz8.getStartnummer());
-        assertEquals(8, platz8.getPlatz());
+        assertEquals(8, platz8.getPlatz().getAsInt());
         assertEquals(9.0, platz8.getPunkte(), 0.001);
     }
     @Test
@@ -161,7 +161,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz9 = ergebnis.getPlaetze()[8];
         assertEquals("1-9", platz9.getStartnummer());
-        assertEquals(9, platz9.getPlatz());
+        assertEquals(9, platz9.getPlatz().getAsInt());
         assertEquals(8.0, platz9.getPunkte(), 0.001);
     }
     @Test
@@ -176,7 +176,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz10 = ergebnis.getPlaetze()[9];
         assertEquals("1-10", platz10.getStartnummer());
-        assertEquals(10, platz10.getPlatz());
+        assertEquals(10, platz10.getPlatz().getAsInt());
         assertEquals(7.0, platz10.getPunkte(), 0.001);
     }
     @Test
@@ -191,7 +191,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz11 = ergebnis.getPlaetze()[10];
         assertEquals("1-11", platz11.getStartnummer());
-        assertEquals(11, platz11.getPlatz());
+        assertEquals(11, platz11.getPlatz().getAsInt());
         assertEquals(6.0, platz11.getPunkte(), 0.001);
     }
     @Test
@@ -206,7 +206,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz12 = ergebnis.getPlaetze()[11];
         assertEquals("1-12", platz12.getStartnummer());
-        assertEquals(12, platz12.getPlatz());
+        assertEquals(12, platz12.getPlatz().getAsInt());
         assertEquals(5.0, platz12.getPunkte(), 0.001);
     }
     @Test
@@ -221,7 +221,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz13 = ergebnis.getPlaetze()[12];
         assertEquals("1-13", platz13.getStartnummer());
-        assertEquals(13, platz13.getPlatz());
+        assertEquals(13, platz13.getPlatz().getAsInt());
         assertEquals(4.0, platz13.getPunkte(), 0.001);
     }
     @Test
@@ -236,7 +236,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz14 = ergebnis.getPlaetze()[13];
         assertEquals("1-14", platz14.getStartnummer());
-        assertEquals(14, platz14.getPlatz());
+        assertEquals(14, platz14.getPlatz().getAsInt());
         assertEquals(3.0, platz14.getPunkte(), 0.001);
     }
     @Test
@@ -251,7 +251,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz15 = ergebnis.getPlaetze()[14];
         assertEquals("1-15", platz15.getStartnummer());
-        assertEquals(15, platz15.getPlatz());
+        assertEquals(15, platz15.getPlatz().getAsInt());
         assertEquals(2.0, platz15.getPunkte(), 0.001);
     }
     @Test
@@ -266,13 +266,13 @@ class PunkteNachPlazierungTest {
 
         Platz platz16 = ergebnis.getPlaetze()[15];
         assertEquals("1-16", platz16.getStartnummer());
-        assertEquals(16, platz16.getPlatz());
+        assertEquals(16, platz16.getPlatz().getAsInt());
         assertEquals(1.0, platz16.getPunkte(), 0.001);
     }
 
 
     @Test
-    void sibzenterPlatzBekommt1Punkte() {
+    void siebzenterPlatzBekommt1Punkte() {
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 17; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -283,7 +283,7 @@ class PunkteNachPlazierungTest {
 
         Platz platz17 = ergebnis.getPlaetze()[16];
         assertEquals("1-17", platz17.getStartnummer());
-        assertEquals(17, platz17.getPlatz());
+        assertEquals(17, platz17.getPlatz().getAsInt());
         assertEquals(0.0, platz17.getPunkte(), 0.001);
     }
 
