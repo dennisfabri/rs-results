@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PunkteNachPlazierungTest {
 
     @Test
-    void leereEingabeErgibtLeeresErgebnis() {
+    void leereEingabeErgibtLeeresErgebnis() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
 
         Ergebnis ergebnis = rekorderListe.toErgebnis();
@@ -19,7 +19,7 @@ class PunkteNachPlazierungTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"1-1", "1-2"})
-    void ersterPlatzBekommt20Punkte(String startnummer) {
+    void ersterPlatzBekommt20Punkte(String startnummer) throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         rekorderListe.put(new Schwimmer(startnummer), 1);
 
@@ -35,7 +35,7 @@ class PunkteNachPlazierungTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"2-1", "2-2"})
-    void zweiterPlatzBekommt18Punkte(String startnummer) {
+    void zweiterPlatzBekommt18Punkte(String startnummer) throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         rekorderListe.put(new Schwimmer("1-1"), 1);
         rekorderListe.put(new Schwimmer(startnummer), 2);
@@ -47,15 +47,17 @@ class PunkteNachPlazierungTest {
         assertEquals("1-1", platz1.getStartnummer());
         assertEquals(1, platz1.getPlatz().getAsInt());
         assertEquals(20.0, platz1.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz1.getStatus());
 
         Platz platz2 = ergebnis.getPlaetze()[1];
         assertEquals(startnummer, platz2.getStartnummer());
         assertEquals(2, platz2.getPlatz().getAsInt());
         assertEquals(18.0, platz2.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz2.getStatus());
     }
 
     @Test
-    void dritterPlatzBekommt16Punkte() {
+    void dritterPlatzBekommt16Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         rekorderListe.put(new Schwimmer("1-3"), 1);
         rekorderListe.put(new Schwimmer("1-5"), 2);
@@ -68,10 +70,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-6", platz3.getStartnummer());
         assertEquals(3, platz3.getPlatz().getAsInt());
         assertEquals(16.0, platz3.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz3.getStatus());
     }
 
     @Test
-    void vierterPlatzBekommt14Punkte() {
+    void vierterPlatzBekommt14Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 4; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -84,10 +87,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-4", platz4.getStartnummer());
         assertEquals(4, platz4.getPlatz().getAsInt());
         assertEquals(14.0, platz4.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz4.getStatus());
     }
 
     @Test
-    void fuenfterPlatzBekommt12Punkte() {
+    void fuenfterPlatzBekommt12Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 5; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -100,11 +104,12 @@ class PunkteNachPlazierungTest {
         assertEquals("1-5", platz5.getStartnummer());
         assertEquals(5, platz5.getPlatz().getAsInt());
         assertEquals(12.0, platz5.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz5.getStatus());
     }
 
     
     @Test
-    void sesterPlatzBekommt10Punkte() {
+    void sesterPlatzBekommt10Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 6; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -117,10 +122,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-6", platz6.getStartnummer());
         assertEquals(6, platz6.getPlatz().getAsInt());
         assertEquals(11.0, platz6.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz6.getStatus());
     }
 
     @Test
-    void sibtnerPlatzBekommt10Punkte() {
+    void sibtnerPlatzBekommt10Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 7; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -133,9 +139,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-7", platz7.getStartnummer());
         assertEquals(7, platz7.getPlatz().getAsInt());
         assertEquals(10.0, platz7.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz7.getStatus());
     }
+
     @Test
-    void achterPlatzBekommt9Punkte() {
+    void achterPlatzBekommt9Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 8; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -148,9 +156,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-8", platz8.getStartnummer());
         assertEquals(8, platz8.getPlatz().getAsInt());
         assertEquals(9.0, platz8.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz8.getStatus());
     }
+
     @Test
-    void neunterPlatzBekommt8Punkte() {
+    void neunterPlatzBekommt8Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 9; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -163,9 +173,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-9", platz9.getStartnummer());
         assertEquals(9, platz9.getPlatz().getAsInt());
         assertEquals(8.0, platz9.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz9.getStatus());
     }
+
     @Test
-    void zehnterPlatzBekommt7Punkte() {
+    void zehnterPlatzBekommt7Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 10; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -178,9 +190,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-10", platz10.getStartnummer());
         assertEquals(10, platz10.getPlatz().getAsInt());
         assertEquals(7.0, platz10.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz10.getStatus());
     }
+
     @Test
-    void elfterPlatzBekommt6Punkte() {
+    void elfterPlatzBekommt6Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 11; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -193,9 +207,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-11", platz11.getStartnummer());
         assertEquals(11, platz11.getPlatz().getAsInt());
         assertEquals(6.0, platz11.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz11.getStatus());
     }
+
     @Test
-    void zfoelfPlatzBekommt5Punkte() {
+    void zfoelfPlatzBekommt5Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 12; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -208,9 +224,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-12", platz12.getStartnummer());
         assertEquals(12, platz12.getPlatz().getAsInt());
         assertEquals(5.0, platz12.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz12.getStatus());
     }
+
     @Test
-    void dreizehnPlatzBekommt4Punkte() {
+    void dreizehnPlatzBekommt4Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 13; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -223,9 +241,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-13", platz13.getStartnummer());
         assertEquals(13, platz13.getPlatz().getAsInt());
         assertEquals(4.0, platz13.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz13.getStatus());
     }
+
     @Test
-    void vierzehnterPlatzBekommt3Punkte() {
+    void vierzehnterPlatzBekommt3Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 14; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -238,9 +258,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-14", platz14.getStartnummer());
         assertEquals(14, platz14.getPlatz().getAsInt());
         assertEquals(3.0, platz14.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz14.getStatus());
     }
+
     @Test
-    void fuenfzenterPlatzBekommt2Punkte() {
+    void fuenfzenterPlatzBekommt2Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 15; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -253,9 +275,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-15", platz15.getStartnummer());
         assertEquals(15, platz15.getPlatz().getAsInt());
         assertEquals(2.0, platz15.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz15.getStatus());
     }
+
     @Test
-    void sechtzehnterPlatzBekommt1Punkte() {
+    void sechtzehnterPlatzBekommt1Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 16; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -268,11 +292,11 @@ class PunkteNachPlazierungTest {
         assertEquals("1-16", platz16.getStartnummer());
         assertEquals(16, platz16.getPlatz().getAsInt());
         assertEquals(1.0, platz16.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz16.getStatus());
     }
 
-
     @Test
-    void siebzenterPlatzBekommt1Punkte() {
+    void siebzenterPlatzBekommt1Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         for (int i = 1; i <= 17; i++) {
             rekorderListe.put(new Schwimmer("1-" + i), i);
@@ -285,7 +309,6 @@ class PunkteNachPlazierungTest {
         assertEquals("1-17", platz17.getStartnummer());
         assertEquals(17, platz17.getPlatz().getAsInt());
         assertEquals(0.0, platz17.getPunkte(), 0.001);
+        assertEquals(Status.Ok, platz17.getStatus());
     }
-
-
 }

@@ -12,7 +12,7 @@ class ZweiSchwimmerSindZeitgleichTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"2-1", "2-2"})
-    void zweiSchwimmerBekommen20Punkte(String startnummer) {
+    void zweiSchwimmerBekommen20Punkte(String startnummer) throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         rekorderListe.put(new Schwimmer("1-1"), 1);
         rekorderListe.put(new Schwimmer(startnummer), 1);
@@ -32,7 +32,7 @@ class ZweiSchwimmerSindZeitgleichTest {
     }
 
     @Test
-    void zweiSchwimmerBekommen18Punkte() {
+    void zweiSchwimmerBekommen18Punkte() throws InputNotValidException{
         RekorderListe rekorderListe = new RekorderListe();
         rekorderListe.put(new Schwimmer("1-1"), 1);
         rekorderListe.put(new Schwimmer("2-1"), 2);

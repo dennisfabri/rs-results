@@ -2,6 +2,7 @@ package de.dlrg.rs.results;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.OptionalInt;
 
 public class RekorderListe {
 
@@ -16,12 +17,27 @@ public class RekorderListe {
         this(0);
     }
 
-    public void put(Schwimmer schwimmer, int reihenfolge) {
-        daten.put(schwimmer.getStartnummer(), new Eingabe(reihenfolge));
+    public void put(Schwimmer schwimmer, int reihenfolge) throws InputNotValidException{
+        put(schwimmer, OptionalInt.of(reihenfolge), Status.Ok);
     }
 
-    public void put(Schwimmer schwimmer, int reihenfolge, Status status) {
+    public void put(Schwimmer schwimmer, Status status) throws InputNotValidException{
+        put(schwimmer, OptionalInt.empty(), status);
+    }
+
+    public void put(Schwimmer schwimmer, int reihenfolge, Status status) throws InputNotValidException {
+        put(schwimmer, OptionalInt.of(reihenfolge), status);
+    }
+
+    private void put(Schwimmer schwimmer, OptionalInt reihenfolge, Status status) throws InputNotValidException {
+        assertValideKombination(reihenfolge, status);
         daten.put(schwimmer.getStartnummer(), new Eingabe(reihenfolge, status));
+    }
+
+    private void assertValideKombination(OptionalInt reihenfolge, Status status) throws InputNotValidException {
+        if (status == Status.NichtAngetreten && reihenfolge.isPresent()) {
+            throw new ReihenfolgeTrotzNichtAngetretenException();
+        }
     }
 
     public Ergebnis toErgebnis() {

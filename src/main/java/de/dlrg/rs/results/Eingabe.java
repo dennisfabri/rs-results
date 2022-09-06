@@ -1,7 +1,9 @@
 package de.dlrg.rs.results;
 
-public record Eingabe(int platzierung, Status status) {
-    public Eingabe(int platzierung) {
+import java.util.OptionalInt;
+
+public record Eingabe(OptionalInt platzierung, Status status) {
+    public Eingabe(OptionalInt platzierung) {
         this(platzierung, Status.Ok);
     }
 }

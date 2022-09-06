@@ -1,5 +1,5 @@
 package de.dlrg.rs.results;
 
 public enum Status {
-    Ok, Disqualifikation
+    Ok, NichtAngetreten, Disqualifikation
 }

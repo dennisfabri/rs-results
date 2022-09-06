@@ -3,6 +3,7 @@ package de.dlrg.rs.results;
 import lombok.Value;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 @Value
 public class Ergebnis {
@@ -10,12 +11,17 @@ public class Ergebnis {
     private int offset;
     private final Platzierung[] platzierungen;
 
-    private static int compare(Platz platz1, Platz platz2) {
-        return platz1.getPlatz().getAsInt() - platz2.getPlatz().getAsInt();
-    }
-
     private static int compare(Platzierung platz1, Platzierung platz2) {
-        return platz1.getPlatzierung() - platz2.getPlatzierung();
+        if (platz1.getPlatzierung().isEmpty() && platz2.getPlatzierung().isEmpty()) {
+            return 0;
+        }
+        if (platz1.getPlatzierung().isEmpty()) {
+            return 1;
+        }
+        if (platz2.getPlatzierung().isEmpty()) {
+            return -1;
+        }
+        return platz1.getPlatzierung().getAsInt() - platz2.getPlatzierung().getAsInt();
     }
 
     public Platz[] getPlaetze() {
@@ -26,27 +32,29 @@ public class Ergebnis {
     }
 
     private List<Platz> plaetzeFuerKorrekteEingaben() {
-        Platzierung[] ok = Arrays.stream(platzierungen).filter(platzierung -> platzierung.getStatus() == Status.Ok).sorted(Ergebnis::compare).toArray(Platzierung[]::new);
-
-        GroupedMap<Integer, Platzierung> gruppiertePlatzierungen = new GroupedMap<>();
-        for (Platzierung platzierung : ok) {
-            gruppiertePlatzierungen.put(platzierung.getPlatzierung(), platzierung);
-        }
-
         List<Platz> plaetzeOk = new ArrayList<>();
-        for (Map.Entry<Integer, List<Platzierung>> gruppe : gruppiertePlatzierungen.entrySet().stream().sorted(Map.Entry.comparingByKey()).toList()) {
+        for (List<Platzierung> gruppe : gruppiereUndSortiereKorrekteEingaben()) {
             int aktuellerPlatz = plaetzeOk.size() + 1;
-            for (Platzierung platzierung : gruppe.getValue()) {
-                plaetzeOk.add(new Platz(platzierung.getStartnummer(), aktuellerPlatz + offset, platzierung.getStatus()));
+            for (Platzierung platzierung : gruppe) {
+                plaetzeOk.add(new Platz(platzierung.getStartnummer(), aktuellerPlatz + offset));
             }
         }
         return plaetzeOk;
     }
 
+    private List<List<Platzierung>> gruppiereUndSortiereKorrekteEingaben() {
+        Platzierung[] ok = Arrays.stream(platzierungen).filter(platzierung -> platzierung.getStatus() == Status.Ok).sorted(Ergebnis::compare).toArray(Platzierung[]::new);
+
+        GroupedMap<Integer, Platzierung> gruppiertePlatzierungen = new GroupedMap<>();
+        for (Platzierung platzierung : ok) {
+            gruppiertePlatzierungen.put(platzierung.getPlatzierung().getAsInt(), platzierung);
+        }
+        return gruppiertePlatzierungen.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(entry -> entry.getValue()).toList();
+    }
+
     private List<Platz> plaetzeFuerNichtKorrekteEingaben() {
-        Platzierung[] nichtOk = Arrays.stream(platzierungen).filter(platzierung -> platzierung.getStatus() != Status.Ok).toArray(Platzierung[]::new);
-        return Arrays.stream(nichtOk)
-                .map(platzierung -> new Platz(platzierung.getStartnummer(), 0, platzierung.getStatus()))
+        return Arrays.stream(platzierungen).filter(platzierung1 -> platzierung1.getStatus() != Status.Ok)
+                .map(platzierung -> new Platz(platzierung.getStartnummer(), OptionalInt.empty(), platzierung.getStatus()))
                 .toList();
     }
 }
